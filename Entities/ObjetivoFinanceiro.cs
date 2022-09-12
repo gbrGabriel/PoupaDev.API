@@ -9,24 +9,20 @@ namespace PoupaDev.API.Entities
 {
     public class ObjetivoFinanceiro
     {
+        private const decimal RENDIMENTO = 0.01m;
         public ObjetivoFinanceiro(string? titulo, string? descricao, decimal? valorObjetivo)
         {
-            Id = new Random().Next(0, 1000);
             Titulo = titulo;
             Descricao = descricao;
             ValorObjetivo = valorObjetivo;
-
             DataCriacao = DateTime.Now;
-
             Operacoes = new List<Operacao>();
         }
-
         public int Id { get; private set; }
         public string? Titulo { get; private set; }
         public string? Descricao { get; private set; }
         public decimal? ValorObjetivo { get; private set; }
         public DateTime DataCriacao { get; private set; }
-
         public List<Operacao> Operacoes { get; private set; }
         public decimal Saldo => ObterSaldo();
 
@@ -37,7 +33,6 @@ namespace PoupaDev.API.Entities
 
             Operacoes.Add(operacao);
         }
-
         public decimal ObterSaldo()
         {
             var totalDeposito = Operacoes.Where(o => o.Tipo == TipoOperacao.Deposito).Sum(d => d.Valor);
@@ -45,6 +40,14 @@ namespace PoupaDev.API.Entities
 
             return totalDeposito - totalSaque;
         }
-    }
+        public void Render()
+        {
+            var valorRendimento = Saldo * RENDIMENTO;
 
+            Console.WriteLine($"Saldo: {Saldo}, Rendimento: {valorRendimento}");
+
+            var deposito = new Operacao(valorRendimento, TipoOperacao.Deposito, Id);
+            Operacoes.Add(deposito);
+        }
+    }
 }
