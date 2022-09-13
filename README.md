@@ -17,7 +17,8 @@ Foi desenvolvida uma API REST completa de gerenciamento de objetivos financeiros
 - Rendimento Automático
 
 ## Passo a passo para rodar o Projeto (Visual Studio Code)
----- Necessário SDK .NET 6.0 ----
+- Necessário SDK .NET 6.0 
+
 - dotnet tool install --global dotnet-ef
 - dotnet user-secrets init
 - dotnet user-secrets set "ConnectionStrings:PoupaDevCs" "Server=IpDoSeuSqlServer;Database=PoupaDevDb;User ID=sa;Password=SenhaDoSeuDb")
